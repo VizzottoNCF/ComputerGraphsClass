@@ -1,0 +1,50 @@
+Rafael Lasch Vizzotto | 14-04-2025
+
+1. O que é o OpenGL?
+Uma API gráfica para renderização 2D e 3D.
+
+2. Qual é o objetivo principal do OpenGL?
+Renderizar gráficos de forma eficiente com hardware gráfico.
+
+3. Quem criou o OpenGL? Qual empresa foi responsável?
+A empresa responsável foi a Silicon Graphics Inc
+
+4. Em que ano o OpenGL foi criado?
+O OpenGL foi criado em 1992.
+
+5. O que significa a sigla “OpenGL”?
+A sigla significa "Open Graphics Library".
+
+6. Quais são os principais recursos oferecidos pelo OpenGL?
+Renderização 2D/3D, texturização, iluminação, buffers, shaders.
+
+7. Em que linguagens de programação o OpenGL pode ser usado?
+Por ser uma API, pode ser usada em diversas linguagens, porém é principalmente usado com C, C++, Java e Python.
+
+8. O OpenGL é uma API de alto ou baixo nível? Explique.
+É de baixo nível, pois exige controle detalhado da renderização.
+
+9. O OpenGL é multiplataforma? Quais sistemas operacionais suportam?
+Sim, o OpenGL funciona em Windows, Linux, macOS e sistemas de consoles.
+
+10. Qual a diferença entre o OpenGL clássico e o OpenGL moderno?
+O clássico usa de várias funções pre-feitas que simplificavam o processo ao custo de customização e otimização. O OpenGL moderno trabalha com informações brutas, usando VBOs e VAOs para receber informações e agir de uma maneira mais especifica.
+
+11. Qual foi a maior mudança trazida com a versão 3.0 do OpenGL?
+A introdução de um pipeline programável e descontinuação de funções antigas.
+
+12. O que é o OpenGL ES e onde ele é utilizado?
+É uma versão simplificada do OpenGL para dispositivos móveis.
+
+13. Quais as diferenças entre o OpenGL e o Vulkan?
+Vulkan é uma ferramenta mais moderna, rápida e com controle mais direto do hardware, porém não possui a mesma simplicidade apresentada no OpenGL.
+
+14. Onde o OpenGL é utilizado no mundo real? Dê exemplos de áreas ou softwares.
+OpenGL é usado em aplicativos que criam uma imagem em um espaço virtual, como Jogos, aplicativos de modelagem 3d, CAD, etc.
+
+15. Quais são algumas vantagens e desvantagens do OpenGL?
+Vantagens: Multiplataforma, bem documentado, uso livre e gratuito.
+Desvantagens: Menor desempenho que APIs modernas, curva de aprendizado íngrime, inconsistencia entre drivers.
+
+16. Existe alguma ferramenta ou biblioteca que facilita o uso do OpenGL? Quais?
+Existem varias bibliotecas de OpenGL, algumas sendo GLU (OpenGL Utility Library), para facilitar tarefas como manipulação de matrizes e criação de objetos,  SDL (Simple DirectMedia Layer), para criação de janelas e GLUT (OpenGL Utility Toolkit), que encapsula chamadas OpenGL em comandos mais fáceis de entender. 

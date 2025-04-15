@@ -101,7 +101,7 @@ def draw():
 # Função principal do programa
 def main():
     pygame.init()  # Inicializa o Pygame
-    pygame.display.set_mode((640, 480), DOUBLEBUF | OPENGL)  
+    pygame.display.set_mode((640, 480), DOUBLEBUF | OPENGL)
     # Cria a janela com buffer duplo (DOUBLEBUF) e suporte OpenGL (OPENGL)
     init()  # Chama a função de inicialização do OpenGL
 
