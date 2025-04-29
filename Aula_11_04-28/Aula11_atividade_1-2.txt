@@ -1,0 +1,72 @@
+RAFAEL LASCH VIZZOTTO.
+ 
+1. Reflexão Ambiente 
+    - Uma iluminação uniforme que simula luz indireta no ambiente. 
+    - Ela não depende de fontes de luz ou câmera
+    - Feita para evitar superfícies totalmente escuras.
+    - É bem leve e rápida em quesitos de processamento, mas não representa detalhes ou profundidade real.
+
+    Exemplo:
+    Elementos que não são alvos de luz, porém mantem-se visíveis, como fases escuras ou até mesmo a UI.    
+
+
+2. Reflexão Difusa 
+    - Iluminação que depende do ângulo entre a luz e a superfície.
+    - Simula texturas/materiais opacos.
+    - Intensidade do brilho dependerá do ângulo formado entre a direção da fonte da luz e a normal da superfície
+    - Dá noção de volume e forma, porém não gera brilhos ou reflexos.
+
+    Exemplo:
+    Paredes com modelagem "chapada" (sem detalhes/protuberâncias) presentes em jogos mais antigos.
+
+
+3. Reflexão Especular 
+4. Modelo de Phong (If = Ia + Id + Is) 
+    - Modelo de sombreamento que combina a Reflexão Ambiente (Ia), Difusa (Id) e Especular (Is)
+    - Considera a contribuição de todos os tipos de luz.
+    - Ajustável para vários materiais.
+    - Realismo equilibrado com simplicidade, porém não considera efeitos físicos complexos (como refração).
+
+    Exemplo:
+    Pode ser visto em jogos mais modernos com maior capacidade gráfica .
+
+5. Modelos de sombreamento: Flat, Gouraud e Phong 
+    Flat Shading 
+        - Um valor de iluminação por face. 
+        - Rápido e simples, porém com aparência facetada. 
+        - Muito visto em jogos retrô (era SNES).
+    
+    Gouraud Shading 
+        - Interpolação da luz nos vértices. 
+        - Suaviza superfícies, porém reflexos podem ser mal representados.
+        - Usado em vários jogos 3D antigos com baixa quantia de polígonos (era PS1).
+    
+    Phong Shading 
+        - Interpolação da normal por pixel. 
+        - Alta qualidade visual, porém com maior custo computacional.
+        - Encontrado em muitos jogos atuais que tentam alcançar um nível de realismo avançado.
+
+ ---------------------------------------
+Parte 2 - Perguntas de Análise 
+1. Por que a luz ambiente, mesmo sendo constante e sem direção, é fundamental em uma cena 3D? 
+> É essencial para uma cena 3d pois é uma "camada" de iluminação indireta, que atinge todas as faces de um objeto vindo de todas as direções, permitindo que um objeto que não esteja sofrendo iluminação direta, ainda seja visível.
+ 
+2. Qual a diferença entre uma reflexão difusa e uma reflexão especular em termos de resultado visual? 
+> Difusa: Reflexão difusa é absorvida pelo objeto, apenas alterando um "multiplicador" de iluminação na normal map de um objeto. 
+> Especular: Reflexão especular não é absorvida pelo objeto, refletindo a cor da fonte de luz que ilumina ele, ao contrário da cor de sua própria normal map.
+
+3. O que muda na aparência de um objeto renderizado apenas com luz ambiente versus um com reflexão difusa e especular? 
+> Um objeto sem textura com apenas luz ambiente seria monocromático e sem profundidade perceptível, atuando como uma visão isométrica. Entretando, ao adicionar a reflexão difusa e especular, é possível observar profundidade na textura do objeto, e highlights que refletem a cor da luz iluminando-o.
+ 
+4. Em quais tipos de superfície a reflexão especular é mais evidente? Por quê? 
+>  Reflexão especular é mais evidente em superfícies brilhantes, polidas ou lustras, porque mantém o raio de luz paralelo após a reflexão.
+ 
+5. Compare o Flat Shading com o Gouraud e o Phong Shading. Qual deles oferece mais realismo e qual tem menor custo computacional? Justifique. Use uma tabela para fazer comparações: modelo, realismo, custo computacional e comentários. 
+
+>      Modelo     |  Realismo | Custo Computacional |          Comentários
+> Flat Shading    |   Baixo   |          Baixo      | Iluminação renderizada uma vez por face.
+> Gouraud Shading |   Médio   |          Médio      | Interpola a iluminação nos vértices.
+> Phong Shading   |   Alto    |          Alto       | Interpola a normal para cada ponto das faces.
+ 
+6. O modelo de iluminação de Phong considera as interações físicas completas da luz? Se não, por que ele ainda é utilizado amplamente? 
+> Não, o modelo de Phong é uma aproximação simples. Ainda é usado porque equilibra bom realismo visual com baixo custo computacional.
