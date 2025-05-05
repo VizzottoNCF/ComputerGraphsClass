@@ -1,9 +1,8 @@
-# Importação das bibliotecas necessárias
-import pygame                            # Responsável por criar a janela e capturar entrada do teclado
-from pygame.locals import *              # Importa constantes úteis do pygame (como teclas)
-from OpenGL.GL import *                  # Comandos do OpenGL para renderização (ex: glBegin, glVertex, glEnable)
-from OpenGL.GLU import *                 # Comandos utilitários do OpenGL (ex: gluPerspective, gluLookAt)
-from PIL import Image                    # Usada para abrir e processar imagens para texturas
+import pygame
+from pygame.locals import *
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from PIL import Image
 
 
 # Variáveis globais de posição e rotação da câmera
@@ -32,16 +31,15 @@ def load_texture(filename):
 
 
 # Função que desenha um cubo com textura aplicada, face por face
-def draw_textured_cube():
-    glBegin(GL_QUADS)  # Inicia desenho de quadriláteros
+def draw_textured_cube(xPos = 0, yPos = 0, zPos = 0, xRot= 0, yRot = 0, zRot = 0, xSca = 1, ySca = 1, zSca = 1):
+    #saves matrix
+    glPushMatrix()
 
-    #Explicação:
-    # glTexCoord2f(0, 0)
-    #→ Indica a coordenada da textura (posição do pixel da imagem que será aplicada no vértice).
-    #→ Neste caso, 0,0 representa o canto inferior esquerdo da imagem.
-    #--------------------------------
-    #glVertex3fv(cube_vertices[0])
-    #→ Indica a posição do vértice no espaço 3D onde essa parte da textura será aplicada.
+    glTranslatef(xPos, yPos, zPos)
+    glRotatef(1,xRot, yRot, zRot)
+    glScalef(xSca,ySca,zSca)
+
+    glBegin(GL_QUADS)  
 
     # FACE TRASEIRA (fundo do cubo)
     glTexCoord2f(0, 0); glVertex3fv(cube_vertices[0])  # inferior esquerdo
@@ -79,87 +77,42 @@ def draw_textured_cube():
     glTexCoord2f(1, 1); glVertex3fv(cube_vertices[7])  # superior frontal
     glTexCoord2f(0, 1); glVertex3fv(cube_vertices[4])  # inferior frontal
 
-    glEnd()  # Finaliza o desenho
+    glEnd()  
+    #restores matrix
+    glPopMatrix() 
 
-def draw_second_textured_cube():
-    glPushMatrix()                     # Salva a matriz atual
-
-    #moves 3 units
-    glTranslatef(3, 0, 0)         
-
-    glBegin(GL_QUADS)
-
-    # FACE TRASEIRA (fundo do cubo)
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[0])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[1])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[2])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[3])
-
-    # FACE FRONTAL
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[4])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[5])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[6])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[7])
-
-    # FACE INFERIOR
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[0])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[1])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[5])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[4])
-
-    # FACE SUPERIOR
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[3])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[2])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[6])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[7])
-
-    # FACE DIREITA
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[1])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[2])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[6])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[5])
-
-    # FACE ESQUERDA
-    glTexCoord2f(0, 0); glVertex3fv(cube_vertices[0])
-    glTexCoord2f(1, 0); glVertex3fv(cube_vertices[3])
-    glTexCoord2f(1, 1); glVertex3fv(cube_vertices[7])
-    glTexCoord2f(0, 1); glVertex3fv(cube_vertices[4])
-
-    glEnd()
-
-    # restores matrix
-    glPopMatrix()
-
-def draw_floor_plane():
+def draw_floor_plane(xPos = 0, yPos = 0, zPos = 0, xRot= 0, yRot = 0, zRot = 0, size = 1):
     #saves current matrix
     glPushMatrix()
-    glTranslate(0,-2,0)
+    glTranslate(xPos,yPos,zPos)
+    glRotatef(1, xRot,yRot,zRot)
     
     glBegin(GL_QUADS)
 
     # setting plane in XZ axis (y = 0)
-    glTexCoord2f(0, 0); glVertex3f(-20, 0, -20)
-    glTexCoord2f(1, 0); glVertex3f(20, 0, -20)
-    glTexCoord2f(1, 1); glVertex3f(20, 0, 20)
-    glTexCoord2f(0, 1); glVertex3f(-20, 0, 20)
+    glTexCoord2f(0, 0); glVertex3f(-size, 0, -size)
+    glTexCoord2f(1, 0); glVertex3f(size, 0, -size)
+    glTexCoord2f(1, 1); glVertex3f(size, 0, size)
+    glTexCoord2f(0, 1); glVertex3f(-size, 0, size)
 
     glEnd()
 
     # restores matrix
     glPopMatrix()
 
-def draw_brick_plane():
+def draw_wall_plane(xPos = 0, yPos = 0, zPos = 0, xRot= 0, yRot = 0, zRot = 0, size = 1):
     #saves current matrix
     glPushMatrix()
-    glTranslate(0,-2,4)
-    
+    glTranslate(xPos,yPos,zPos)
+    glRotatef(70, xRot,yRot,zRot)
+
     glBegin(GL_QUADS)
 
     # setting plane in YZ axis (vertical)
-    glTexCoord2f(0, 0); glVertex3f(-5, -5, 0)
-    glTexCoord2f(1, 0); glVertex3f(5, -5, 0)
-    glTexCoord2f(1, 1); glVertex3f(5, 5, 0)
-    glTexCoord2f(0, 1); glVertex3f(-5, 5, 0)
+    glTexCoord2f(0, 0); glVertex3f(-size, -size, 0)
+    glTexCoord2f(1, 0); glVertex3f(size, -size, 0)
+    glTexCoord2f(1, 1); glVertex3f(size, size, 0)
+    glTexCoord2f(0, 1); glVertex3f(-size, size, 0)
 
     glEnd()
 
@@ -239,6 +192,11 @@ def main():
     tex2_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/careca.png")
     tex3_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/grass.jpg")
     tex4_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/brick.jpg")
+    # tex5_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/")
+    # tex6_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/")
+    # tex7_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/")
+    # tex8_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/")
+    # tex9_id = load_texture("C:/Users/T-GAMER/Pictures/Faculdade/ComputerGraphics/Aula_11_04-28/")
 
     clock = pygame.time.Clock()                            # Relógio para limitar FPS
     global camera_x, camera_y, camera_z, rot_x, rot_y      # Acessa variáveis globais da câmera
@@ -266,40 +224,41 @@ def main():
         if keys[K_f]: rot_x += 1                           # Inclina para baixo
 
 
-        # Define o ponto de observação da câmera (olha sempre para frente no eixo Z positivo)
-        target_x = camera_x        # Olha para frente, mantendo a mesma linha no eixo X
-        target_y = camera_y        # Mesma altura
-        target_z = camera_z + 1    # Um passo à frente na direção Z
+        # target point for camera
+        target_x = camera_x
+        target_y = camera_y
+        target_z = camera_z + 1
 
-        # Define transformações da câmera
         glLoadIdentity()
-        #Exemplo gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
+        
+        
         gluLookAt(camera_x, camera_y, camera_z,  # posição da câmera no mundo 3D (olho)
                   target_x, target_y, target_z,  # ponto para onde a câmera está olhando, vai virar a lente nesta direção
                   0, 1, 0)                       # vetor 'para cima' (eixo Y positivo) Isso evita que a imagem fique de cabeça para baixo.
         
-        glRotatef(rot_x, 1, 0, 0)                                # Rotação vertical
-        glRotatef(rot_y, 0, 1, 0)                                # Rotação horizontal
+        glRotatef(rot_x, 1, 0, 0)
+        glRotatef(rot_y, 0, 1, 0)
 
         # Limpa buffers de cor e profundidade para novo frame
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-        # Aplica a textura e desenha os cubos
+        # apply textures and render
+        #cubes
         glBindTexture(GL_TEXTURE_2D, tex_id)
         draw_textured_cube()
 
         glBindTexture(GL_TEXTURE_2D, tex2_id)
-        draw_second_textured_cube()
+        draw_textured_cube(3)
 
-        # draws floor
+        # floor
         glBindTexture(GL_TEXTURE_2D, tex3_id)
-        draw_floor_plane()
+        draw_floor_plane(0,-2,0,0,0,0,20)
 
-        #draws brick plane
+        # walls
         glBindTexture(GL_TEXTURE_2D, tex4_id)
-        draw_brick_plane()
+        draw_wall_plane(0,2,4,0,0,0,5)
+        draw_wall_plane(10,2,-5,0,1,0,5)
 
-        # Atualiza o conteúdo da janela (renderiza frame)
         pygame.display.flip()
 
     pygame.quit()  # Finaliza o Pygame
