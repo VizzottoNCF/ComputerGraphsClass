@@ -104,7 +104,7 @@ def draw_wall_plane(xPos = 0, yPos = 0, zPos = 0, xRot= 0, yRot = 0, zRot = 0, s
     #saves current matrix
     glPushMatrix()
     glTranslate(xPos,yPos,zPos)
-    glRotatef(70, xRot,yRot,zRot)
+    glRotatef(90, xRot,yRot,zRot)
 
     glBegin(GL_QUADS)
 
