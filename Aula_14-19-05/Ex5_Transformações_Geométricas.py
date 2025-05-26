@@ -200,7 +200,7 @@ def inicializaRenderizacao():
 
         #configura o valor da variavel "matriz" do shader, que corresponde a transformações geométricas
                                 #translação    #rotações         #escala
-        transformacaoGeometrica(0.1, 0.0, 0.0, 0.0, 30.0, 15.0, 1.0, 1.0, 1.0)
+        transformacaoGeometrica(0.1, 0.0, 0.0, 0.0, 30.0, 45.0, 1.0, 2.0, 1.0)
         #As transformações são especificadas pelos argumentos passados para a função 
         # transformacaoGeometrica, que controlam a translação (tx, ty, tz), rotação (rx, ry, rz) 
         # e escala (sx, sy, sz) do objeto.

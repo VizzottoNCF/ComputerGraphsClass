@@ -264,7 +264,7 @@ def inicializaRenderizacao():
         # draws Triangle 2 (VAO 1)
         glBindVertexArray(Vao[1])
         glDrawArrays(GL_TRIANGLES, 0, 3)
-
+        
         # draws Square 1 (VAO 2)
         glBindVertexArray(Vao[2])
         glDrawArrays(GL_TRIANGLES, 0, 6)
@@ -273,10 +273,7 @@ def inicializaRenderizacao():
         glfw.poll_events()
         glfw.swap_buffers(Window) # renders screen 
 
-        # Verificamos se a tecla ESC foi pressionada. Caso positivo, definimos que a tela deve ser
-		# fechada na próxima volta do laço.
-		# Para testar se outras teclas foram pressionadas, verifique o seguinte link:
-		# http://www.glfw.org/docs/latest/group__input.html
+        # closes if ESC is pressed
         if (glfw.PRESS == glfw.get_key(Window, glfw.KEY_ESCAPE)):
             glfw.set_window_should_close(Window, True)
     
@@ -284,6 +281,7 @@ def inicializaRenderizacao():
 
 # main function
 def main():
+
     inicializaOpenGL() # set ups OpenGL
     inicializaTriangulos() # models triangles and sends them to the gpu
     inicializaShaders() # programs shaders, specifying objects to be rendered
